@@ -1,0 +1,26 @@
+<?php
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Order extends Model
+{
+    protected $fillable = [
+
+        'user_id',
+        'guest_name',
+        'guest_phone',
+        'total_price',
+        'status',
+
+        'payment_method',
+        'payment_status',
+        'payment_reference',
+
+    ];
+
+    public function items()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+}

@@ -1,0 +1,75 @@
+<?php
+
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PromotionController;
+use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReceiptController;
+use App\Http\Controllers\Staff\OrderController;
+use App\Http\Controllers\Staff\StaffMenuController;
+use App\Http\Controllers\User\MembershipController;
+use App\Http\Controllers\User\OrderController as UserOrderController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
+// Route untuk ke landing page
+Route::get('/', [MenuController::class, 'home']);
+Route::get('/menu', [MenuController::class, 'menu']);
+Route::get('/gallery', function () {return view('landing.gallery');});
+Route::get('/about', function () {return view('landing.about');});
+
+Route::get('/cart', [CartController::class, 'cart']);
+Route::get('/add-to-cart/{id}', [CartController::class, 'add']);
+Route::get('/remove-cart/{id}', [CartController::class, 'remove']);
+Route::get('/checkout', [CartController::class, 'checkout']);
+Route::post('/place-order', [CartController::class, 'placeOrder']);
+Route::get('/receipt/{id}/view', [ReceiptController::class, 'viewReceipt']);
+Route::get('/receipt/{id}', [ReceiptController::class, 'generate']);
+
+Route::get('/dashboard', function () {
+    if (Auth::user()->role === 'admin') {
+        return redirect('/admin');
+    }
+    if (Auth::user()->role === 'staff') {
+        return redirect('/staff');
+    }
+    return view('user.dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/my-orders', [UserOrderController::class, 'index']);
+    Route::get('/membership', [MembershipController::class, 'index']);
+});
+
+// Route untuk admin page
+Route::get('/admin',
+    [DashboardController::class, 'index']
+)->middleware('admin');
+
+// Route untuk staff page
+Route::get('/staff', function () {
+    return view('staff.dashboard');
+})->middleware('staff');
+
+Route::middleware(['staff'])->group(function () {
+
+    Route::resource('staff/menu', StaffMenuController::class);
+    Route::get('/staff/orders', [OrderController::class, 'index']);
+    Route::get('/staff/orders/{id}', [OrderController::class, 'show']);
+    Route::put('/staff/orders/{id}', [OrderController::class, 'update']);
+
+});
+
+Route::middleware(['admin'])->group(function () {
+
+    Route::resource('admin/promotions', PromotionController::class);
+    Route::get('/admin/reports', [ReportController::class, 'index']);
+
+});
+
+require __DIR__ . '/auth.php';
