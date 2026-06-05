@@ -24,6 +24,14 @@ class ReportController extends Controller
             ->where('status', 'completed')
             ->sum('total_price');
 
+        $monthlyRevenueChart = Order::selectRaw(
+            'MONTH(created_at) as month,
+            SUM(total_price) as revenue'
+        )
+            ->where('status', 'completed')
+            ->groupBy('month')
+            ->get();
+
         $completedOrders = Order::where(
             'status',
             'completed'
@@ -45,7 +53,8 @@ class ReportController extends Controller
                 'todayRevenue',
                 'monthlyRevenue',
                 'completedOrders',
-                'topMenus'
+                'topMenus',
+                'monthlyRevenueChart'
             )
         );
 

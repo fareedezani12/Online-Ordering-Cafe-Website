@@ -1,5 +1,23 @@
 <h1>Add Menu</h1>
 
+@if ($errors->any())
+
+    <div style="color:red">
+
+        <ul>
+
+            @foreach ($errors->all() as $error)
+
+                <li>{{ $error }}</li>
+
+            @endforeach
+
+        </ul>
+
+    </div>
+
+@endif
+
 <form action="{{ url('staff/menu') }}" method="POST" enctype="multipart/form-data">
 
     @csrf

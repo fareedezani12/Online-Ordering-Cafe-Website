@@ -46,7 +46,6 @@ class StaffMenuController extends Controller
             'description' => 'required',
             'price'       => 'required|numeric|min:0',
             'category'    => 'required',
-            'image'       => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         Menu::create([

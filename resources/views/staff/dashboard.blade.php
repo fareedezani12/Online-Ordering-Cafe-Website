@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Staff Dashboard - Peta Dunia Cafe</title>
-
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
@@ -23,14 +21,10 @@
             <span>Peta Dunia Cafe</span>
         </div>
 
-        <nav id="nav">
-            <ul>
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="{{ url('staff/menu') }}">Manage Menu</a></li>
-                <li><a href="{{ url('staff/orders') }}">Customer Order</a></li>
-                <li><a href="{{ url('/about') }}">Order Status</a></li>
-            </ul>
-        </nav>
+        <div class="logo">
+
+        <span>Welcome to Peta Dunia Staff Page :) </span>
+        </div>
 
         <div class="buttons">
 
@@ -50,7 +44,7 @@
 
                     <a href="#">
                         <i class="fas fa-gauge"></i>
-                        Staff Profile
+                        Staff Profile`
                     </a>
 
                     <form method="POST" action="{{ route('logout') }}">
@@ -76,63 +70,63 @@
 
     <main>
 
-        <section class="popular-dishes">
+        <section class="dashboard-hero">
+            <div class="">
 
-            <h2>Staff Dashboard</h2>
+                <img src="{{ asset('images/emoji-dashboard-staff2.png') }}"
+                    class="welcome-banner"
+                    alt="Staff Banner">
 
-            <div class="dishes">
-
-                <div class="dish">
-                    <h3>Total Orders</h3>
-                    <p>View all incoming customer orders</p>
-                    <span class="price">25 Orders</span>
+                <div class="welcome-content">
                 </div>
 
-                <div class="dish">
-                    <h3>Pending Orders</h3>
-                    <p>Orders waiting for preparation</p>
-                    <span class="price">8 Pending</span>
-                </div>
+            </div>
+        </section>
 
-                <div class="dish">
-                    <h3>Completed Orders</h3>
-                    <p>Successfully completed today</p>
-                    <span class="price">17 Done</span>
-                </div>
+        <section class="stats-grid">
 
-                <div class="dish">
-                    <a href="{{ url('staff/menu') }}">
-                    <h3>Manage Menu</h3>
-                    <p>Manage cafe menu items</p>
-                    <span class="price">40 Items</span>
-                </div>
+            <div class="stat-card">
+                <i class="fas fa-receipt"></i>
+                <h3>25</h3>
+                <p>Total Orders</p>
+            </div>
 
+            <div class="stat-card">
+                <i class="fas fa-clock"></i>
+                <h3>8</h3>
+                <p>Pending Orders</p>
+            </div>
+
+            <div class="stat-card">
+                <i class="fas fa-check-circle"></i>
+                <h3>17</h3>
+                <p>Completed Orders</p>
+            </div>
+
+            <div class="stat-card">
+                <i class="fas fa-coins"></i>
+                <h3>RM 1,240</h3>
+                <p>Today's Sales</p>
             </div>
 
         </section>
 
-        <section class="popular-dishes">
+        <section class="quick-access">
 
-            <h2>Quick Actions</h2>
+            <a href="{{ url('staff/menu') }}" class="action-card">
+                <i class="fas fa-utensils"></i>
+                <span>Manage Menu</span>
+            </a>
 
-            <div class="dishes">
+            <a href="{{ url('staff/orders') }}" class="action-card">
+                <i class="fas fa-receipt"></i>
+                <span>Customer Orders</span>
+            </a>
 
-                <div class="dish">
-                    <h3>Add New Menu</h3>
-                    <p>Create new food or beverage</p>
-                </div>
-
-                <div class="dish">
-                    <h3>Update Order Status</h3>
-                    <p>Change customer order progress</p>
-                </div>
-
-                <div class="dish">
-                    <h3>View Reservations</h3>
-                    <p>Check booking table requests</p>
-                </div>
-
-            </div>
+            <a href="{{ url('staff/status') }}" class="action-card">
+                <i class="fas fa-truck"></i>
+                <span>Order Status</span>
+            </a>
 
         </section>
 
