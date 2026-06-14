@@ -14,12 +14,22 @@ class PromotionController extends Controller
     {
         $promotions = Promotion::latest()->get();
 
+        $activePromotions = Promotion::whereDate('end_date', '>=', today())->count();
+
+        $memberOnly = Promotion::where('members_only', 1)->count();
+
+        $expiredPromotions = Promotion::whereDate('end_date', '<', today())->count();
+
         return view(
             'admin.promotions.index',
-            compact('promotions')
+            compact(
+                'promotions',
+                'activePromotions',
+                'memberOnly',
+                'expiredPromotions'
+            )
         );
     }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -52,7 +62,8 @@ class PromotionController extends Controller
 
         ]);
 
-        return redirect('admin/promotions');
+        return redirect('/admin/promotions')
+            ->with('success', 'Promotion created successfully.');
 
     }
 
@@ -67,24 +78,57 @@ class PromotionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $promotion = Promotion::findOrFail($id);
+
+        return view(
+            'admin.promotions.edit',
+            compact('promotion')
+        );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $promotion = Promotion::findOrFail($id);
+
+        $promotion->update([
+
+            'title'               => $request->title,
+
+            'description'         => $request->description,
+
+            'discount_percentage' => $request->discount_percentage,
+
+            'members_only'        => $request->members_only,
+
+            'start_date'          => $request->start_date,
+
+            'end_date'            => $request->end_date,
+
+        ]);
+
+        return redirect('/admin/promotions')
+            ->with(
+                'success',
+                'Promotion updated successfully.'
+            );
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        Promotion::findOrFail($id)->delete();
+
+        return redirect('/admin/promotions')
+            ->with(
+                'success',
+                'Promotion deleted successfully.'
+            );
     }
 }

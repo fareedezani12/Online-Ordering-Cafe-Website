@@ -1,12 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PromotionController;
-use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReceiptController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\Staff\OrderController;
 use App\Http\Controllers\Staff\StaffMenuController;
 use App\Http\Controllers\User\MembershipController;
@@ -46,11 +47,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/membership', [MembershipController::class, 'index']);
 });
 
-// Route untuk admin page
-Route::get('/admin',
-    [DashboardController::class, 'index']
-)->middleware('admin');
-
 // Route untuk staff page
 Route::get('/staff', function () {
     return view('staff.dashboard');
@@ -65,10 +61,31 @@ Route::middleware(['staff'])->group(function () {
 
 });
 
+// Route untuk admin page
+Route::get('/admin',
+    [DashboardController::class, 'index']
+)->middleware('admin');
+
 Route::middleware(['admin'])->group(function () {
 
+    Route::resource('staff/menu', StaffMenuController::class);
+    Route::get('/staff/orders', [OrderController::class, 'index']);
+    Route::get('/staff/orders/{id}', [OrderController::class, 'show']);
+    Route::put('/staff/orders/{id}', [OrderController::class, 'update']);
+
     Route::resource('admin/promotions', PromotionController::class);
-    Route::get('/admin/reports', [ReportController::class, 'index']);
+    Route::get(
+        '/admin/reports',
+        [ReportController::class, 'index']
+    )->middleware('admin');
+
+    Route::resource('admin/customers', CustomerController::class);
+    Route::get('/admin/customers', [CustomerController::class, 'index']);
+
+    Route::get(
+        '/admin/reports/export',
+        [ReportController::class, 'export']
+    )->middleware('admin');
 
 });
 

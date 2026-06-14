@@ -1,74 +1,374 @@
-<h1>Customer Orders</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-<table border="1" cellpadding="10">
+<head>
 
-    <tr>
+<meta charset="UTF-8">
 
-        <th>ID</th>
-        <th>Customer</th>
-        <th>Total</th>
-        <th>Status</th>
-        <th>Action</th>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    </tr>
+<title>Order Management</title>
 
-    @foreach($orders as $order)
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('css/header.css') }}">
+<link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+<link rel="stylesheet" href="{{ asset('css/orders.css') }}">
 
-    <tr>
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        <td>{{ $order->id }}</td>
+</head>
 
-        <td>
+<body>
 
-            @if($order->user_id)
+<div class="container">
 
-                Member Order
+<header>
 
-            @else
+<div class="logo">
 
-                {{ $order->guest_name }}
+<img src="{{ asset('images/logo-petadunia.jpg') }}"
+class="logo-img">
 
-            @endif
+<span>Peta Dunia Cafe</span>
 
-        </td>
+</div>
 
-        <td>
+<h2 style="color:#00573F;">
 
-            RM {{ number_format($order->total_price, 2) }}
+Order Management
 
-        </td>
+</h2>
 
-        <td>
+<div class="buttons">
 
-            {{ $order->status }}
+<a href="{{ request()->is('admin/*') ? url('/admin') : url('/admin') }}"
+class="btn btn-primary">
 
-        </td>
+<i class="fas fa-house"></i>
 
-        <td>
+Dashboard
 
-            <a href="{{ url('/staff/orders/'.$order->id) }}">
-                View
-            </a>
+</a>
 
-        </td>
+</div>
 
-    </tr>
+</header>
 
-    @endforeach
+<main class="admin-dashboard">
+
+<div class="hero-admin">
+
+<div class="hero-left">
+
+<span class="hero-badge">
+
+ORDER MANAGEMENT
+
+</span>
+
+<h1>
+
+Manage Customer Orders
+
+</h1>
+
+<p>
+
+Track customer orders and update their status in real time.
+
+</p>
+
+</div>
+
+<div class="hero-right">
+
+<img src="{{ asset('images/emoji-dashboard-staff2.png') }}">
+
+</div>
+
+</div>
+
+<div class="dashboard-cards">
+
+<div class="dashboard-card green">
+
+<div>
+
+<span>Pending</span>
+
+<h2>
+
+{{ $orders->where('status','pending')->count() }}
+
+</h2>
+
+</div>
+
+<i class="fas fa-clock"></i>
+
+</div>
+
+<div class="dashboard-card orange">
+
+<div>
+
+<span>Preparing</span>
+
+<h2>
+
+{{ $orders->where('status','preparing')->count() }}
+
+</h2>
+
+</div>
+
+<i class="fas fa-fire"></i>
+
+</div>
+
+<div class="dashboard-card blue">
+
+<div>
+
+<span>Completed</span>
+
+<h2>
+
+{{ $orders->where('status','completed')->count() }}
+
+</h2>
+
+</div>
+
+<i class="fas fa-circle-check"></i>
+
+</div>
+
+<div class="dashboard-card purple">
+
+<div>
+
+<span>Total Orders</span>
+
+<h2>
+
+{{ $orders->count() }}
+
+</h2>
+
+</div>
+
+<i class="fas fa-receipt"></i>
+
+</div>
+
+</div>
+
+<div class="admin-card">
+
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;">
+
+<h2>
+
+Customer Orders
+
+</h2>
+
+<input
+
+type="text"
+
+id="searchOrder"
+
+placeholder="Search order..."
+
+class="form-control"
+
+style="max-width:300px;">
+
+</div>
+
+<table class="admin-table">
+
+<thead>
+
+<tr>
+
+<th>Order ID</th>
+
+<th>Customer</th>
+
+<th>Total</th>
+
+<th>Status</th>
+
+<th>Date</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="orderTable">
+
+@forelse($orders as $order)
+
+<tr>
+
+<td>
+
+#{{ $order->id }}
+
+</td>
+
+<td>
+
+@if($order->user)
+
+{{ $order->user->name }}
+
+@else
+
+{{ $order->guest_name }}
+
+@endif
+
+</td>
+
+<td>
+
+RM {{ number_format($order->total_price,2) }}
+
+</td>
+
+<td>
+
+@if($order->status=="pending")
+
+<span class="badge-pending">
+
+Pending
+
+</span>
+
+@elseif($order->status=="preparing")
+
+<span class="badge-preparing">
+
+Preparing
+
+</span>
+
+@elseif($order->status=="completed")
+
+<span class="badge-completed">
+
+Completed
+
+</span>
+
+@else
+
+<span class="badge-cancel">
+
+Cancelled
+
+</span>
+
+@endif
+
+</td>
+
+<td>
+
+{{ $order->created_at->format('d M Y') }}
+
+</td>
+
+<td>
+
+<a
+
+href="{{ request()->is('admin/*')
+    ? url('admin/orders/'.$order->id)
+    : url('staff/orders/'.$order->id) }}"
+
+class="view-btn">
+
+<i class="fas fa-eye"></i>
+
+</a>
+
+</td>
+
+</tr>
+
+@empty
+
+<tr>
+
+<td colspan="6">
+
+<div class="empty-state">
+
+<i class="fas fa-box-open"></i>
+
+<h2>
+
+No Orders Yet
+
+</h2>
+
+<p>
+
+Orders will appear here.
+
+</p>
+
+</div>
+
+</td>
+
+</tr>
+
+@endforelse
+
+</tbody>
 
 </table>
 
-@if(session('success'))
+</div>
+
+</main>
+
+</div>
 
 <script>
 
-Swal.fire({
-    icon: 'success',
-    title: 'Success',
-    text: '{{ session("success") }}',
-    confirmButtonColor: '#3085d6'
+const search=document.getElementById("searchOrder");
+
+search.addEventListener("keyup",function(){
+
+let value=this.value.toLowerCase();
+
+let rows=document.querySelectorAll("#orderTable tr");
+
+rows.forEach(row=>{
+
+row.style.display=row.innerText.toLowerCase().includes(value)
+
+? ""
+
+: "none";
+
+});
+
 });
 
 </script>
 
-@endif
+</body>
+
+</html>

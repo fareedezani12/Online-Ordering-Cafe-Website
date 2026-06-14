@@ -14,6 +14,12 @@ class StaffMenuController extends Controller
     {
         $menus = Menu::all();
 
+        if (request()->is('admin/*')) {
+
+            return view('staff.menu.index', compact('menus'));
+
+        }
+
         return view('staff.menu.index', compact('menus'));
 
     }

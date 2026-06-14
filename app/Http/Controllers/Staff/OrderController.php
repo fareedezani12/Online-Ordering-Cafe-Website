@@ -10,21 +10,30 @@ class OrderController extends Controller
 {
     public function index()
     {
+        $orders = Order::with('user')
+            ->latest()
+            ->get();
 
-        $orders = Order::latest()->get();
+        if (request()->is('admin/*')) {
+
+            return view('staff.orders.index', compact('orders'));
+
+        }
 
         return view('staff.orders.index', compact('orders'));
-
     }
 
-    public function show(string $id)
+    public function show($id)
     {
+        $order = Order::with('user', 'items.menu')->findOrFail($id);
 
-        $order = Order::with('items.menu')
-            ->findOrFail($id);
+        if (request()->is('admin/*')) {
+
+            return view('staff.orders.show', compact('order'));
+
+        }
 
         return view('staff.orders.show', compact('order'));
-
     }
 
     public function update(Request $request, string $id)

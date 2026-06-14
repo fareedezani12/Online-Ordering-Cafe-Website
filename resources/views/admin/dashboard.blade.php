@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Peta Dunia Cafe</title>
-
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
@@ -75,836 +77,1058 @@
 
     </header>
 
-    <main class="admin-dashboard">
+<main class="admin-dashboard">
 
-        <section class="hero-admin">
+    <!-- ================= HERO ================= -->
 
-            <div class="hero-left">
+    <section class="hero-admin">
 
-                <span class="hero-badge">
+        <div class="hero-left">
 
-                    ADMIN PANEL
+            <span class="hero-badge">
 
-                </span>
+                🚀 Peta Dunia Cafe Management Portal
 
-                <h1>
+            </span>
 
-                    Welcome Back,
-                    {{ Auth::user()->name }}
+            <h1>
 
-                </h1>
+                Good {{ now()->hour < 12 ? 'Morning' : (now()->hour < 18 ? 'Afternoon' : 'Evening') }},
 
-                <p>
+                {{ Auth::user()->name }} 👋
 
-                    Manage menu items,
-                    promotions,
-                    memberships,
-                    sales reports
-                    and customer orders
-                    from one dashboard.
+            </h1>
 
-                </p>
+            <p>
 
-                <div class="hero-buttons">
+                Welcome back.
 
-                    <a href="{{ url('admin/reports') }}">
+                Monitor business performance, customer activity,
 
-                        View Reports
+                menu management and revenue from one intelligent dashboard.
 
-                    </a>
+            </p>
 
-                    <a href="{{ url('admin/promotions') }}">
+            <div class="hero-buttons">
 
-                        Promotions
+                <a href="{{ url('admin/reports') }}">
 
-                    </a>
+                    <i class="fa-solid fa-chart-line"></i>
 
-                </div>
+                    Generate Report
 
-            </div>
+                </a>
 
-            <div class="hero-right">
+                <a href="{{ url('admin/promotions') }}">
 
-                <img src="{{ asset('images/emoji-dashboard-staff2.png') }}">
+                    <i class="fa-solid fa-gift"></i>
 
-            </div>
+                    Promotions
 
-        </section>
-
-        <div style="
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            margin-bottom:20px;">
-
-            <div>
-
-                <h1 style="
-                    color: green;
-                    margin:0;
-                ">
-                    Dashboard Overview
-                </h1>
-
-                <p style="
-                    color: green;
-                    margin-top:5px;
-                ">
-                    Monitor your cafe performance and customer activity.
-                </p>
+                </a>
 
             </div>
 
         </div>
 
-        <section style="
-                display:grid;
-                grid-template-columns:repeat(4,1fr);
-                gap:20px;
-                margin-top:20px;">
+        <div class="hero-right">
+
+            <img src="{{ asset('images/emoji-dashboard-staff2.png') }}">
+
+        </div>
+
+    </section>
 
 
-            <!-- Users -->
-            <div style="
-                background:#F5EEDC;
-                border-top:5px solid #355E3B;
-                padding:25px;
-                border-radius:15px;
-                box-shadow:0 4px 12px rgba(0,0,0,0.08);
-            ">
 
-                <i class="fas fa-users"
-                style="
-                        font-size:40px;
-                        color:#355E3B;
-                ">
-                </i>
+    <!-- ================= TODAY OVERVIEW ================= -->
 
-                <p style="
-                    margin-top:15px;
-                    color:#666;
-                    font-size:14px;
-                ">
-                    Total Users
-                </p>
 
-                <h1 style="
-                    color:#355E3B;
-                    margin:0;
-                ">
-                    {{ $totalUsers }}
-                </h1>
+    <section class="dashboard-cards">
 
-            </div>
+        <div class="dashboard-card">
 
-            <!-- Orders -->
-            <div style="
-                background:#F5EEDC;
-                border-top:5px solid #D4A017;
-                padding:25px;
-                border-radius:15px;
-                box-shadow:0 4px 12px rgba(0,0,0,0.08);
-            ">
+            <div>
 
-                <i class="fas fa-receipt"
-                style="
-                        font-size:40px;
-                        color:#D4A017;
-                ">
-                </i>
+                <span>Today's Revenue</span>
 
-                <p style="
-                    margin-top:15px;
-                    color:#666;
-                    font-size:14px;
-                ">
-                    Total Orders
-                </p>
+                <h2>
 
-                <h1 style="
-                    color:#355E3B;
-                    margin:0;
-                ">
-                    {{ $totalOrders }}
-                </h1>
+                    RM {{ number_format($todayRevenue,2) }}
 
-            </div>
-
-            <!-- Revenue -->
-            <div style="
-                background:#F5EEDC;
-                border-top:5px solid #28A745;
-                padding:25px;
-                border-radius:15px;
-                box-shadow:0 4px 12px rgba(0,0,0,0.08);
-            ">
-
-                <i class="fas fa-money-bill-wave"
-                style="
-                        font-size:40px;
-                        color:#28A745;
-                ">
-                </i>
-
-                <p style="
-                    margin-top:15px;
-                    color:#666;
-                    font-size:14px;
-                ">
-                    Total Revenue
-                </p>
-
-                <h2 style="
-                    color:#355E3B;
-                    margin:0;
-                ">
-                    RM {{ number_format($totalRevenue,2) }}
                 </h2>
 
+                <small>
+
+                    Revenue generated today
+
+                </small>
+
             </div>
 
-            <!-- Members -->
-            <div style="
-                background:#F5EEDC;
-                border-top:5px solid #6F42C1;
-                padding:25px;
-                border-radius:15px;
-                box-shadow:0 4px 12px rgba(0,0,0,0.08);
-            ">
+            <div class="card-icon green">
 
-                <i class="fas fa-id-card"
-                style="
-                        font-size:40px;
-                        color:#6F42C1;
-                ">
-                </i>
+                <i class="fa-solid fa-money-bill-wave"></i>
 
-                <p style="
-                    margin-top:15px;
-                    color:#666;
-                    font-size:14px;
-                ">
-                    Total Members
+            </div>
+
+        </div>
+
+
+
+        <div class="dashboard-card">
+
+            <div>
+
+                <span>Today's Orders</span>
+
+                <h2>
+
+                    {{ $todayOrders }}
+
+                </h2>
+
+                <small>
+
+                    Orders received today
+
+                </small>
+
+            </div>
+
+            <div class="card-icon orange">
+
+                <i class="fa-solid fa-receipt"></i>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="dashboard-card">
+
+            <div>
+
+                <span>Completed</span>
+
+                <h2>
+
+                    {{ $completedToday }}
+
+                </h2>
+
+                <small>
+
+                    Completed today
+
+                </small>
+
+            </div>
+
+            <div class="card-icon blue">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="dashboard-card">
+
+            <div>
+
+                <span>Pending</span>
+
+                <h2>
+
+                    {{ $pendingOrders }}
+
+                </h2>
+
+                <small>
+
+                    Waiting for preparation
+
+                </small>
+
+            </div>
+
+            <div class="card-icon red">
+
+                <i class="fa-solid fa-clock"></i>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= MAIN KPI ================= -->
+
+
+
+    <h2 class="section-title">
+
+        Business Overview
+
+    </h2>
+
+
+
+    <section class="dashboard-cards">
+
+        <div class="dashboard-card">
+
+            <div>
+
+                <span>Total Users</span>
+
+                <h2>
+
+                    {{ $totalUsers }}
+
+                </h2>
+
+                <small>
+
+                    Registered customers
+
+                </small>
+
+            </div>
+
+            <div class="card-icon green">
+
+                <i class="fa-solid fa-users"></i>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="dashboard-card">
+
+            <div>
+
+                <span>Total Orders</span>
+
+                <h2>
+
+                    {{ $totalOrders }}
+
+                </h2>
+
+                <small>
+
+                    Orders processed
+
+                </small>
+
+            </div>
+
+            <div class="card-icon orange">
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="dashboard-card">
+
+            <div>
+
+                <span>Total Revenue</span>
+
+                <h2 class="counter"
+
+data-target="{{ $totalRevenue }}">
+
+0
+
+</h2>
+
+                <small>
+
+                    Completed sales
+
+                </small>
+
+            </div>
+
+            <div class="card-icon blue">
+
+                <i class="fa-solid fa-wallet"></i>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="dashboard-card">
+
+            <div>
+
+                <span>Total Members</span>
+
+                <h2>
+
+                    {{ $totalMembers }}
+
+                </h2>
+
+                <small>
+
+                    Loyalty programme
+
+                </small>
+
+            </div>
+
+            <div class="card-icon purple">
+
+                <i class="fa-solid fa-crown"></i>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+<div class="dashboard-card">
+
+<div>
+
+<span>System Status</span>
+
+<h2 style="color:#2ECC71;">
+
+ONLINE
+
+</h2>
+
+<small>
+
+All services running normally
+
+</small>
+
+</div>
+
+<i class="fa-solid fa-server"></i>
+
+</div>
+
+    <!-- ================= QUICK ACTION ================= -->
+
+
+
+    <h2 class="section-title">
+
+        Quick Actions
+
+    </h2>
+
+
+
+    <section class="quick-grid">
+
+
+
+        <a href="{{ url('staff/menu') }}" class="quick-card">
+
+            <i class="fa-solid fa-utensils"></i>
+
+            <h3>Manage Menu</h3>
+
+            <p>
+
+                Add, edit and delete menu items.
+
+            </p>
+
+        </a>
+
+
+
+        <a href="{{ url('staff/orders') }}" class="quick-card">
+
+            <i class="fa-solid fa-receipt"></i>
+
+            <h3>Orders</h3>
+
+            <p>
+
+                Update customer order status.
+
+            </p>
+
+        </a>
+
+
+
+        <a href="{{ url('admin/promotions') }}" class="quick-card">
+
+            <i class="fa-solid fa-gift"></i>
+
+            <h3>Promotion</h3>
+
+            <p>
+
+                Create cafe campaigns.
+
+            </p>
+
+        </a>
+
+
+
+        <a href="{{ url('admin/reports') }}" class="quick-card">
+
+            <i class="fa-solid fa-chart-column"></i>
+
+            <h3>Sales Report</h3>
+
+            <p>
+
+                View business analytics.
+
+            </p>
+
+        </a>
+
+
+
+        <a href="{{ url('membership') }}" class="quick-card">
+
+            <i class="fa-solid fa-id-card"></i>
+
+            <h3>Membership</h3>
+
+            <p>
+
+                Loyalty programme management.
+
+            </p>
+
+        </a>
+
+
+
+        <a href="{{ url('admin/customers') }}" class="quick-card">
+
+            <i class="fa-solid fa-users"></i>
+
+            <h3>Customers</h3>
+
+            <p>
+
+                View customer information.
+
+            </p>
+
+        </a>
+
+    </section>
+
+
+
+<!-- ================= CHART SECTION STARTS BELOW ================= -->
+<!-- ========================================= -->
+<!-- BUSINESS ANALYTICS -->
+<!-- ========================================= -->
+
+<h2 class="section-title">
+
+    Business Analytics
+
+</h2>
+
+<div class="analytics-grid">
+
+    <!-- Revenue Chart -->
+
+    <div class="chart-card">
+
+        <div class="chart-header">
+
+            <div>
+
+                <h3>
+
+                    Monthly Revenue
+
+                </h3>
+
+                <p>
+
+                    Revenue generated every month
+
                 </p>
 
-                <h1 style="
-                    color:#355E3B;
-                    margin:0;
-                ">
-                    {{ $totalMembers }}
-                </h1>
+            </div>
+
+            <i class="fa-solid fa-chart-column"></i>
+
+        </div>
+
+        <canvas id="revenueChart"></canvas>
+
+    </div>
+
+
+
+    <!-- Orders Chart -->
+
+    <div class="chart-card">
+
+        <div class="chart-header">
+
+            <div>
+
+                <h3>
+
+                    Monthly Orders
+
+                </h3>
+
+                <p>
+
+                    Customer ordering trend
+
+                </p>
 
             </div>
 
-        </section>
+            <i class="fa-solid fa-chart-line"></i>
 
-        <section style="margin-top:30px;">
+        </div>
 
-            <h2 style="
-                color: green;
-                margin-bottom:15px;
-            ">
-            </h2>
+        <canvas id="ordersChart"></canvas>
 
-            <div style="
-                display:grid;
-                grid-template-columns:repeat(4,1fr);
-                gap:20px;
-            ">
+    </div>
 
-                <div style="
-                    background:#F5EEDC;
-                    padding:20px;
-                    border-radius:15px;
-                    text-align:center;
-                ">
+</div>
 
-                    <i class="fas fa-receipt"
-                    style="
-                            font-size:30px;
-                            color:#355E3B;
-                    ">
-                    </i>
 
-                    <h3>Today's Orders</h3>
 
-                    <p style="
-                        font-size:28px;
-                        font-weight:bold;
-                        color:#355E3B;
-                    ">
-                        {{ $todayOrders }}
-                    </p>
+<!-- ========================================= -->
 
-                </div>
+<!-- SECOND ROW -->
 
-                <div style="
-                    background:#F5EEDC;
-                    padding:20px;
-                    border-radius:15px;
-                    text-align:center;
-                ">
+<!-- ========================================= -->
 
-                    <i class="fas fa-money-bill-wave"
-                    style="
-                            font-size:30px;
-                            color:#355E3B;
-                    ">
-                    </i>
+<div class="analytics-grid second-row">
 
-                    <h3>Today's Revenue</h3>
+    <!-- Membership -->
 
-                    <p style="
-                        font-size:28px;
-                        font-weight:bold;
-                        color:#355E3B;
-                    ">
-                        RM {{ number_format($todayRevenue,2) }}
-                    </p>
+    <div class="chart-card membership-card">
 
-                </div>
+        <div class="chart-header">
 
-                <div style="
-                    background:#F5EEDC;
-                    padding:20px;
-                    border-radius:15px;
-                    text-align:center;
-                ">
+            <div>
 
-                    <i class="fas fa-check-circle"
-                    style="
-                            font-size:30px;
-                            color:#355E3B;
-                    ">
-                    </i>
+                <h3>
 
-                    <h3>Completed Orders</h3>
+                    Membership Distribution
 
-                    <p style="
-                        font-size:28px;
-                        font-weight:bold;
-                        color:#355E3B;
-                    ">
-                        {{ $completedToday }}
-                    </p>
+                </h3>
 
-                </div>
+                <p>
 
-                <div style="
-                    background:#F5EEDC;
-                    padding:20px;
-                    border-radius:15px;
-                    text-align:center;
-                ">
+                    Customer loyalty programme
 
-                    <i class="fas fa-user-plus"
-                    style="
-                            font-size:30px;
-                            color:#355E3B;
-                    ">
-                    </i>
-
-                    <h3>New Members</h3>
-
-                    <p style="
-                        font-size:28px;
-                        font-weight:bold;
-                        color:#355E3B;
-                    ">
-                        {{ $newMembersToday }}
-                    </p>
-
-                </div>
+                </p>
 
             </div>
 
-        </section>
+            <i class="fa-solid fa-crown"></i>
 
-        <section class="admin-card">
+        </div>
 
-            <div style="
-                display:flex;
-                gap:20px;
-                margin-top:20px;
-            ">
-
-                <div style="
-                    flex:1;
-                    background:white;
-                    padding:20px;
-                    border-radius:15px;
-                ">
-                    <h3>Monthly Revenue</h3>
+        <div class="membership-wrapper">
 
-                    <canvas id="revenueChart"
-                            style="max-height:250px;">
-                    </canvas>
-                </div>
+            <canvas id="membershipChart"></canvas>
 
-                <div style="
-                    flex:1;
-                    background:white;
-                    padding:20px;
-                    border-radius:15px;
-                ">
-                    <h3>Monthly Orders</h3>
+        </div>
 
-                    <canvas id="ordersChart"
-                            style="max-height:250px;">
-                    </canvas>
-                </div>
+    </div>
 
-            </div>
 
-            <div style="
-                background:white;
-                padding:20px;
-                border-radius:15px;
-                margin-top:20px;
-            ">
 
-                <h3>Membership Distribution</h3>
+    <!-- Business Insight -->
 
-                <div style="
-                    width:300px;
-                    margin:auto;
-                ">
+    <div class="insight-card">
 
-                    <canvas id="membershipChart"></canvas>
+        <h3>
 
-                </div>
+            Business Insight
 
-            </div>
+        </h3>
 
-        </section>
+        <div class="insight-list">
 
-        <section style="margin-top:30px;">
+            <div class="insight-item">
 
-            <h2 style="
-                color: green;
-                margin-bottom:15px;
-            ">
-                Recent Orders
-            </h2>
+                <i class="fa-solid fa-fire"></i>
 
-            <div style="
-                background:#F5EEDC;
-                border-radius:20px;
-                overflow:hidden;
-            ">
+                <div>
 
-                <table style="
-                    width:100%;
-                    border-collapse:collapse;
-                ">
+                    <span>
 
-                    <thead>
+                        Popular Category
 
-                        <tr style="
-                            background:#355E3B;
-                            color:white;
-                        ">
+                    </span>
 
-                            <th style="padding:15px;">Order ID</th>
-                            <th>Customer</th>
-                            <th>Total</th>
-                            <th>Status</th>
-                            <th>Date</th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                        @foreach($recentOrders as $order)
-
-                        <tr style="
-                            text-align:center;
-                            border-bottom:1px solid #ddd;
-                        ">
-
-                            <td style="padding:15px;">
-                                #{{ $order->id }}
-                            </td>
-
-                            <td>
-
-                                @if($order->user_id)
-
-                                    User #{{ $order->user_id }}
-
-                                @else
-
-                                    {{ $order->guest_name }}
-
-                                @endif
-
-                            </td>
-
-                            <td>
-                                RM {{ number_format($order->total_price,2) }}
-                            </td>
-
-                            <td>
-
-                                @if($order->status == 'completed')
-
-                                    <span style="
-                                        background:#28a745;
-                                        color:white;
-                                        padding:5px 10px;
-                                        border-radius:20px;
-                                    ">
-                                        Completed
-                                    </span>
-
-                                @elseif($order->status == 'preparing')
-
-                                    <span style="
-                                        background:#ffc107;
-                                        color:black;
-                                        padding:5px 10px;
-                                        border-radius:20px;
-                                    ">
-                                        Preparing
-                                    </span>
-
-                                @else
-
-                                    <span style="
-                                        background:#dc3545;
-                                        color:white;
-                                        padding:5px 10px;
-                                        border-radius:20px;
-                                    ">
-                                        Pending
-                                    </span>
-
-                                @endif
-
-                            </td>
-
-                            <td>
-                                {{ $order->created_at->format('d M Y') }}
-                            </td>
-
-                        </tr>
-
-                        @endforeach
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-        </section>
-
-        <section style="margin-top:30px;">
-
-            <h2 style="
-                color: green;
-                margin-bottom:15px;
-            ">
-                Top Selling Menu
-            </h2>
-
-            <div style="
-                display:flex;
-                gap:20px;
-            ">
-
-                @foreach($topMenus as $item)
-
-                <div style="
-                    flex:1;
-                    background:#F5EEDC;
-                    border-radius:20px;
-                    padding:20px;
-                    text-align:center;
-                ">
-
-                    <img
-                        src="{{ asset('images/'.$item->menu->image) }}"
-                        style="
-                            width:100%;
-                            height:180px;
-                            object-fit:cover;
-                            border-radius:15px;
-                        "
-                    >
-
-                    <h3 style="
-                        color:#355E3B;
-                        margin-top:15px;
-                    ">
-                        {{ $item->menu->name }}
-                    </h3>
-
-                    <p>
-                        Category:
-                        {{ $item->menu->category }}
-                    </p>
-
-                    <div style="
-                        background:#355E3B;
-                        color:white;
-                        padding:10px;
-                        border-radius:10px;
-                        margin-top:10px;
-                    ">
-
-                        Sold:
-                        {{ $item->total_sold }}
-
-                    </div>
-
-                </div>
-
-                @endforeach
-
-            </div>
-
-        </section>
-
-        <section style="margin-top:30px;">
-
-            <h2 style="
-                color: green;
-                margin-bottom:15px;
-            ">
-                Business Insights
-            </h2>
-
-            <div style="
-                display:grid;
-                grid-template-columns:repeat(2,1fr);
-                gap:20px;
-            ">
-
-                <div style="
-                    background:#F5EEDC;
-                    padding:20px;
-                    border-radius:15px;
-                ">
-
-                    <h3>📈 Revenue Overview</h3>
-
-                    <p>
-                        Total Revenue:
-                        <strong>
-                            RM {{ number_format($totalRevenue,2) }}
-                        </strong>
-                    </p>
-
-                </div>
-
-                <div style="
-                    background:#F5EEDC;
-                    padding:20px;
-                    border-radius:15px;
-                ">
-
-                    <h3>🔥 Popular Category</h3>
-
-                    <p>
+                    <strong>
 
                         {{ $popularCategory->category ?? 'No Data' }}
 
-                    </p>
+                    </strong>
 
                 </div>
 
-                <div style="
-                    background:#F5EEDC;
-                    padding:20px;
-                    border-radius:15px;
-                ">
+            </div>
 
-                    <h3>⚠️ Pending Orders</h3>
 
-                    <p>
+
+            <div class="insight-item">
+
+                <i class="fa-solid fa-clock"></i>
+
+                <div>
+
+                    <span>
+
+                        Pending Orders
+
+                    </span>
+
+                    <strong>
 
                         {{ $pendingOrders }}
 
-                    </p>
+                    </strong>
 
                 </div>
 
-                <div style="
-                    background:#F5EEDC;
-                    padding:20px;
-                    border-radius:15px;
-                ">
+            </div>
 
-                    <h3>🎁 Active Promotions</h3>
 
-                    <p>
+
+            <div class="insight-item">
+
+                <i class="fa-solid fa-gift"></i>
+
+                <div>
+
+                    <span>
+
+                        Active Promotions
+
+                    </span>
+
+                    <strong>
 
                         {{ $activePromotions }}
 
-                    </p>
+                    </strong>
 
                 </div>
 
             </div>
 
-        </section>
 
-        <section style="margin-top:30px;">
-            <h2 style="
-                color: green;
-                margin-bottom:15px;
-            ">
-                Quick Actions
-            </h2>
 
-            <div style="
-                display:grid;
-                grid-template-columns:repeat(3,1fr);
-                gap:20px;
-            ">
+            <div class="insight-item">
 
-                <a href="{{ url('staff/menu') }}"
-                style="
-                    background:#F5EEDC;
-                    text-decoration:none;
-                    color:#355E3B;
-                    padding:25px;
-                    border-radius:15px;
-                    text-align:center;
-                    transition:0.3s;
-                ">
+                <i class="fa-solid fa-wallet"></i>
 
-                    <i class="fas fa-utensils"
-                    style="font-size:40px;">
-                    </i>
+                <div>
 
-                    <h3>Manage Menu</h3>
+                    <span>
 
-                    <p>
-                        Add, edit and delete menu items.
-                    </p>
+                        Total Revenue
 
-                </a>
+                    </span>
 
-                <a href="{{ url('staff/orders') }}"
-                style="
-                    background:#F5EEDC;
-                    text-decoration:none;
-                    color:#355E3B;
-                    padding:25px;
-                    border-radius:15px;
-                    text-align:center;
-                ">
+                    <h2 class="counter"
 
-                    <i class="fas fa-receipt"
-                    style="font-size:40px;">
-                    </i>
+data-target="{{ $totalRevenue }}">
 
-                    <h3>Manage Orders</h3>
+0
 
-                    <p>
-                        Track and update customer orders.
-                    </p>
+</h2>
 
-                </a>
-
-                <a href="{{ url('admin/promotions') }}"
-                style="
-                    background:#F5EEDC;
-                    text-decoration:none;
-                    color:#355E3B;
-                    padding:25px;
-                    border-radius:15px;
-                    text-align:center;
-                ">
-
-                    <i class="fas fa-gift"
-                    style="font-size:40px;">
-                    </i>
-
-                    <h3>Promotions</h3>
-
-                    <p>
-                        Create and manage cafe promotions.
-                    </p>
-
-                </a>
-
-                <a href="{{ url('membership') }}"
-                style="
-                    background:#F5EEDC;
-                    text-decoration:none;
-                    color:#355E3B;
-                    padding:25px;
-                    border-radius:15px;
-                    text-align:center;
-                ">
-
-                    <i class="fas fa-id-card"
-                    style="font-size:40px;">
-                    </i>
-
-                    <h3>Memberships</h3>
-
-                    <p>
-                        View loyalty program statistics.
-                    </p>
-
-                </a>
-
-                <a href="{{ url('admin/reports') }}"
-                style="
-                    background:#F5EEDC;
-                    text-decoration:none;
-                    color:#355E3B;
-                    padding:25px;
-                    border-radius:15px;
-                    text-align:center;
-                ">
-
-                    <i class="fas fa-chart-line"
-                    style="font-size:40px;">
-                    </i>
-
-                    <h3>Reports</h3>
-
-                    <p>
-                        View revenue and sales reports.
-                    </p>
-
-                </a>
-
-                <a href="#"
-                style="
-                    background:#F5EEDC;
-                    text-decoration:none;
-                    color:#355E3B;
-                    padding:25px;
-                    border-radius:15px;
-                    text-align:center;
-                ">
-
-                    <i class="fas fa-users"
-                    style="font-size:40px;">
-                    </i>
-
-                    <h3>Users</h3>
-
-                    <p>
-                        Manage customer accounts.
-                    </p>
-
-                </a>
+                </div>
 
             </div>
 
-        </section>
+        </div>
 
-    </main>
+    </div>
 
+</div>
+
+<!-- ===================================== -->
+<!-- RECENT ORDERS -->
+<!-- ===================================== -->
+
+<h2 class="section-title">
+
+    Recent Orders
+
+</h2>
+
+<div class="table-card">
+
+    <table class="admin-table">
+
+        <thead>
+
+            <tr>
+
+                <th>#</th>
+
+                <th>Customer</th>
+
+                <th>Total</th>
+
+                <th>Status</th>
+
+                <th>Date</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @foreach($recentOrders as $order)
+
+            <tr>
+
+                <td>
+
+                    #{{ $order->id }}
+
+                </td>
+
+                <td>
+
+                    @if($order->user)
+
+                        {{ $order->user->name }}
+
+                    @else
+
+                        {{ $order->guest_name }}
+
+                    @endif
+
+                </td>
+
+                <td>
+
+                    RM {{ number_format($order->total_price,2) }}
+
+                </td>
+
+                <td>
+
+                    @if($order->status=="completed")
+
+                        <span class="badge success">
+
+                            Completed
+
+                        </span>
+
+                    @elseif($order->status=="preparing")
+
+                        <span class="badge warning">
+
+                            Preparing
+
+                        </span>
+
+                    @else
+
+                        <span class="badge danger">
+
+                            Pending
+
+                        </span>
+
+                    @endif
+
+                </td>
+
+                <td>
+
+                    {{ $order->created_at->format('d M Y') }}
+
+                </td>
+
+            </tr>
+
+            @endforeach
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+
+
+
+<!-- ===================================== -->
+<!-- TOP SELLING MENU -->
+<!-- ===================================== -->
+
+<h2 class="section-title">
+
+    Best Selling Menu
+
+</h2>
+
+<div class="menu-grid">
+
+    @foreach($topMenus as $item)
+
+    <div class="menu-card">
+
+        <img src="{{ asset('images/'.$item->menu->image) }}">
+
+        <div class="menu-content">
+
+            <h3>
+
+                {{ $item->menu->name }}
+
+            </h3>
+
+            <span>
+
+                {{ $item->menu->category }}
+
+            </span>
+
+            <div class="sold-box">
+
+                {{ $item->total_sold }}
+
+                Sold
+
+            </div>
+
+        </div>
+
+    </div>
+
+    @endforeach
+
+</div>
+
+
+
+
+
+<!-- ===================================== -->
+<!-- BUSINESS STATUS -->
+<!-- ===================================== -->
+
+<h2 class="section-title">
+
+    Cafe Performance
+
+</h2>
+
+<div class="status-grid">
+
+    <div class="status-card">
+
+        <i class="fa-solid fa-fire"></i>
+
+        <h3>
+
+            Popular Category
+
+        </h3>
+
+        <h2>
+
+            {{ $popularCategory->category ?? 'No Data' }}
+
+        </h2>
+
+    </div>
+
+
+
+    <div class="status-card">
+
+        <i class="fa-solid fa-clock"></i>
+
+        <h3>
+
+            Pending Orders
+
+        </h3>
+
+        <h2>
+
+            {{ $pendingOrders }}
+
+        </h2>
+
+    </div>
+
+
+
+    <div class="status-card">
+
+        <i class="fa-solid fa-gift"></i>
+
+        <h3>
+
+            Active Promotion
+
+        </h3>
+
+        <h2>
+
+            {{ $activePromotions }}
+
+        </h2>
+
+    </div>
+
+</div>
+
+
+
+
+
+<!-- ===================================== -->
+<!-- ADMIN ACTIVITY -->
+<!-- ===================================== -->
+
+<h2 class="section-title">
+
+    System Activity
+
+</h2>
+
+<div class="timeline-card">
+
+    <div class="timeline-item">
+
+        <div class="timeline-dot"></div>
+
+        <div>
+
+            <h4>
+
+                New Order Received
+
+            </h4>
+
+            <span>
+
+                Customer placed an online order.
+
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="timeline-item">
+
+        <div class="timeline-dot green"></div>
+
+        <div>
+
+            <h4>
+
+                Promotion Running
+
+            </h4>
+
+            <span>
+
+                {{ $activePromotions }}
+
+                active promotion available.
+
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="timeline-item">
+
+        <div class="timeline-dot orange"></div>
+
+        <div>
+
+            <h4>
+
+                Membership Growth
+
+            </h4>
+
+            <span>
+
+                {{ $totalMembers }}
+
+                registered members.
+
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+</main>
+<footer class="dashboard-footer">
+
+<div>
+
+Peta Dunia Cafe Management System
+
+Version 1.0
+
+</div>
+
+<div>
+
+Last Updated :
+
+{{ now()->format('d M Y H:i') }}
+
+</div>
+
+</footer>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -1004,6 +1228,41 @@ new Chart(
         }
     }
 );
+
+</script>
+<script>
+
+const counters=document.querySelectorAll(".counter");
+
+counters.forEach(counter=>{
+
+const update=()=>{
+
+const target=+counter.dataset.target;
+
+const count=+counter.innerText;
+
+const speed=40;
+
+const inc=target/speed;
+
+if(count<target){
+
+counter.innerText=Math.ceil(count+inc);
+
+setTimeout(update,30);
+
+}else{
+
+counter.innerText=target.toLocaleString();
+
+}
+
+}
+
+update();
+
+});
 
 </script>
 

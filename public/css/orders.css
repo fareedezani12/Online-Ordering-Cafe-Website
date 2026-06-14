@@ -1,0 +1,398 @@
+/* ===========================
+        ORDER MANAGEMENT
+=============================*/
+
+.orders-container {
+    margin-top: 30px;
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.order-header h1 {
+    color: #00573f;
+    font-size: 34px;
+    font-weight: 700;
+}
+
+.order-header p {
+    color: #7d7d7d;
+}
+
+/* ===========================
+            CARDS
+=============================*/
+
+.dashboard-cards {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 20px;
+
+    margin: 30px 0;
+}
+
+.dashboard-card {
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 28px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
+    transition: 0.3s;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+.dashboard-card span {
+    color: #999;
+
+    font-size: 14px;
+}
+
+.dashboard-card h2 {
+    margin-top: 8px;
+
+    color: #00573f;
+
+    font-size: 34px;
+
+    font-weight: 700;
+}
+
+.dashboard-card i {
+    font-size: 45px;
+
+    opacity: 0.15;
+}
+
+/* colors */
+
+.green {
+    border-left: 6px solid #16a34a;
+}
+
+.orange {
+    border-left: 6px solid #f59e0b;
+}
+
+.blue {
+    border-left: 6px solid #3b82f6;
+}
+
+.purple {
+    border-left: 6px solid #9333ea;
+}
+
+/* ===========================
+          ADMIN CARD
+=============================*/
+
+.admin-card {
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    margin-top: 25px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* ===========================
+          TABLE
+=============================*/
+
+.admin-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    margin-top: 20px;
+}
+
+.admin-table thead {
+    background: #00573f;
+
+    color: white;
+}
+
+.admin-table th {
+    padding: 18px;
+
+    font-size: 15px;
+
+    text-align: center;
+}
+
+.admin-table td {
+    padding: 18px;
+
+    text-align: center;
+
+    border-bottom: 1px solid #eee;
+}
+
+.admin-table tbody tr {
+    transition: 0.25s;
+}
+
+.admin-table tbody tr:hover {
+    background: #f8f8f8;
+}
+
+/* ===========================
+        STATUS BADGES
+=============================*/
+
+.badge-pending {
+    background: #fff3cd;
+
+    color: #856404;
+
+    padding: 8px 16px;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.badge-preparing {
+    background: #dbeafe;
+
+    color: #2563eb;
+
+    padding: 8px 16px;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.badge-completed {
+    background: #dcfce7;
+
+    color: #15803d;
+
+    padding: 8px 16px;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.badge-cancel {
+    background: #fee2e2;
+
+    color: #dc2626;
+
+    padding: 8px 16px;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+/* ===========================
+        BUTTON
+=============================*/
+
+.view-btn {
+    width: 42px;
+
+    height: 42px;
+
+    display: inline-flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: #00573f;
+
+    color: white;
+
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    transition: 0.3s;
+}
+
+.view-btn:hover {
+    background: #f47920;
+
+    transform: scale(1.08);
+}
+
+/* ===========================
+          SEARCH
+=============================*/
+
+.form-control {
+    width: 100%;
+
+    padding: 14px 18px;
+
+    border-radius: 12px;
+
+    border: 1px solid #ddd;
+
+    outline: none;
+
+    font-size: 15px;
+}
+
+.form-control:focus {
+    border: 1px solid #00573f;
+
+    box-shadow: 0 0 8px rgba(0, 87, 63, 0.15);
+}
+
+/* ===========================
+        EMPTY STATE
+=============================*/
+
+.empty-state {
+    padding: 60px;
+
+    text-align: center;
+}
+
+.empty-state i {
+    font-size: 70px;
+
+    color: #d1d5db;
+}
+
+.empty-state h2 {
+    margin-top: 15px;
+
+    color: #374151;
+}
+
+.empty-state p {
+    color: #9ca3af;
+}
+
+/* ===========================
+        ORDER DETAIL
+=============================*/
+
+.detail-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 25px;
+}
+
+.detail-item {
+    background: #fafafa;
+
+    padding: 20px;
+
+    border-radius: 15px;
+}
+
+.detail-item strong {
+    color: #00573f;
+}
+
+/* ===========================
+        STATUS SELECT
+=============================*/
+
+select {
+    width: 100%;
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    border: 1px solid #ddd;
+
+    font-size: 15px;
+}
+
+select:focus {
+    border-color: #00573f;
+}
+
+/* ===========================
+        UPDATE BUTTON
+=============================*/
+
+.btn-update {
+    background: #00573f;
+
+    color: white;
+
+    border: none;
+
+    padding: 14px 28px;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+.btn-update:hover {
+    background: #f47920;
+}
+
+/* ===========================
+        RESPONSIVE
+=============================*/
+
+@media (max-width: 1200px) {
+    .dashboard-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-table {
+        display: block;
+
+        overflow-x: auto;
+    }
+}

@@ -1,0 +1,434 @@
+/* ===========================
+   MENU MANAGEMENT
+=========================== */
+
+.admin-dashboard {
+    background: #f8f9fa;
+    border-radius: 30px;
+    padding: 35px;
+    margin-top: 20px;
+}
+
+/* Hero */
+
+.hero-admin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #00573f, #007a57);
+    border-radius: 25px;
+    padding: 45px;
+    margin-bottom: 35px;
+    overflow: hidden;
+    position: relative;
+}
+
+.hero-admin::before {
+    content: "";
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    top: -180px;
+    right: -100px;
+}
+
+.hero-left {
+    flex: 1;
+    z-index: 2;
+}
+
+.hero-right {
+    flex: 1;
+    text-align: right;
+    z-index: 2;
+}
+
+.hero-right img {
+    max-width: 320px;
+    transition: 0.4s;
+}
+
+.hero-right img:hover {
+    transform: scale(1.05);
+}
+
+.hero-badge {
+    background: #f47920;
+    color: white;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.hero-left h1 {
+    color: white;
+    font-size: 42px;
+    margin: 20px 0 10px;
+}
+
+.hero-left p {
+    color: #e8e8e8;
+    line-height: 1.8;
+}
+
+/* Dashboard cards */
+
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 35px;
+}
+
+.dashboard-card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    transition: 0.3s;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-card span {
+    color: #888;
+    font-size: 14px;
+}
+
+.dashboard-card h2 {
+    margin-top: 10px;
+    color: #00573f;
+    font-size: 34px;
+}
+
+.dashboard-card i {
+    font-size: 45px;
+}
+
+.green {
+    border-left: 6px solid #2ecc71;
+}
+
+.orange {
+    border-left: 6px solid #f47920;
+}
+
+.blue {
+    border-left: 6px solid #3498db;
+}
+
+.purple {
+    border-left: 6px solid #9b59b6;
+}
+
+/* Admin card */
+
+.admin-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* Search */
+
+#searchInput {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    outline: none;
+    margin-bottom: 25px;
+    transition: 0.3s;
+}
+
+#searchInput:focus {
+    border-color: #00573f;
+
+    box-shadow: 0 0 0 3px rgba(0, 87, 63, 0.12);
+}
+
+/* Table */
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-table thead {
+    background: #00573f;
+}
+
+.admin-table th {
+    color: white;
+    padding: 18px;
+    text-align: center;
+}
+
+.admin-table td {
+    padding: 18px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+.admin-table tbody tr {
+    transition: 0.25s;
+}
+
+.admin-table tbody tr:hover {
+    background: #f9fafb;
+}
+
+/* image */
+
+.admin-table img {
+    width: 70px;
+    height: 70px;
+    border-radius: 15px;
+    object-fit: cover;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* badge */
+
+.badge {
+    background: #eaf8f2;
+    color: #00573f;
+    padding: 8px 15px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Buttons */
+
+.edit-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 42px;
+    height: 42px;
+
+    background: #3498db;
+    color: white;
+
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    margin-right: 8px;
+
+    transition: 0.3s;
+}
+
+.edit-btn:hover {
+    transform: translateY(-3px);
+
+    background: #217dbb;
+}
+
+.delete-btn {
+    width: 42px;
+    height: 42px;
+
+    border: none;
+
+    background: #e74c3c;
+
+    color: white;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.delete-btn:hover {
+    transform: translateY(-3px);
+
+    background: #c0392b;
+}
+
+/* Add Button */
+
+.btn-secondary {
+    background: #00573f;
+
+    color: white;
+
+    padding: 12px 22px;
+
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+.btn-secondary:hover {
+    background: #007a57;
+
+    transform: translateY(-3px);
+}
+
+/* Empty State */
+
+.empty-state {
+    padding: 70px;
+    text-align: center;
+}
+
+.empty-state i {
+    font-size: 70px;
+
+    color: #ccc;
+}
+
+.empty-state h2 {
+    margin-top: 20px;
+
+    color: #00573f;
+}
+
+.empty-state p {
+    color: #888;
+}
+
+/* Responsive */
+
+@media (max-width: 992px) {
+    .dashboard-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero-admin {
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+    .hero-right {
+        margin-top: 25px;
+
+        text-align: center;
+    }
+
+    .hero-right img {
+        max-width: 240px;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+
+.form-control {
+    width: 100%;
+
+    padding: 14px 16px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 12px;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: 0.3s;
+
+    background: white;
+}
+
+.form-control:focus {
+    border-color: #00573f;
+
+    box-shadow: 0 0 0 3px rgba(0, 87, 63, 0.15);
+}
+
+label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-weight: 600;
+
+    color: #00573f;
+}
+
+.upload-box {
+    border: 2px dashed #00573f;
+
+    padding: 15px;
+
+    border-radius: 15px;
+
+    background: #fafafa;
+}
+
+.btn-primary {
+    background: #00573f;
+
+    color: white;
+
+    padding: 12px 25px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background: #007a57;
+
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: #e5e7eb;
+
+    color: #374151;
+
+    padding: 12px 25px;
+
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+.btn-secondary:hover {
+    background: #d1d5db;
+}

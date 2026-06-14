@@ -13,4 +13,9 @@ class Membership extends Model
         'total_spending',
 
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
