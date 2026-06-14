@@ -42,7 +42,7 @@ Order Management
 
 <div class="buttons">
 
-<a href="{{ request()->is('admin/*') ? url('/admin') : url('/admin') }}"
+<a href="{{ Auth::user()->role == 'admin' ? url('/admin') : url('/staff') }}"
 class="btn btn-primary">
 
 <i class="fas fa-house"></i>

@@ -8,7 +8,9 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\StaffController;
 use App\Http\Controllers\Staff\OrderController;
+use App\Http\Controllers\Staff\StaffMembershipController;
 use App\Http\Controllers\Staff\StaffMenuController;
 use App\Http\Controllers\User\MembershipController;
 use App\Http\Controllers\User\OrderController as UserOrderController;
@@ -48,17 +50,24 @@ Route::middleware('auth')->group(function () {
 });
 
 // Route untuk staff page
-Route::get('/staff', function () {
-    return view('staff.dashboard');
-})->middleware('staff');
+Route::middleware(['auth', 'staff'])->group(function () {
 
-Route::middleware(['staff'])->group(function () {
+    Route::get('/staff', [StaffController::class, 'dashboard']);
 
     Route::resource('staff/menu', StaffMenuController::class);
+
     Route::get('/staff/orders', [OrderController::class, 'index']);
     Route::get('/staff/orders/{id}', [OrderController::class, 'show']);
     Route::put('/staff/orders/{id}', [OrderController::class, 'update']);
+    Route::resource('admin/customers', CustomerController::class);
+    Route::get('/admin/customers', [CustomerController::class, 'index']);
+    Route::resource(
 
+        'membership',
+
+        StaffMembershipController::class
+
+    );
 });
 
 // Route untuk admin page
@@ -68,19 +77,11 @@ Route::get('/admin',
 
 Route::middleware(['admin'])->group(function () {
 
-    Route::resource('staff/menu', StaffMenuController::class);
-    Route::get('/staff/orders', [OrderController::class, 'index']);
-    Route::get('/staff/orders/{id}', [OrderController::class, 'show']);
-    Route::put('/staff/orders/{id}', [OrderController::class, 'update']);
-
     Route::resource('admin/promotions', PromotionController::class);
     Route::get(
         '/admin/reports',
         [ReportController::class, 'index']
     )->middleware('admin');
-
-    Route::resource('admin/customers', CustomerController::class);
-    Route::get('/admin/customers', [CustomerController::class, 'index']);
 
     Route::get(
         '/admin/reports/export',

@@ -36,13 +36,14 @@
 
     <div class="buttons">
 
-        <a href="{{ url('/admin') }}" class="btn btn-primary">
+        <a href="{{ Auth::user()->role == 'admin' ? url('/admin') : url('/staff') }}"
+class="btn btn-primary">
 
-            <i class="fas fa-house"></i>
+<i class="fas fa-house"></i>
 
-            Dashboard
+Dashboard
 
-        </a>
+</a>
 
     </div>
 

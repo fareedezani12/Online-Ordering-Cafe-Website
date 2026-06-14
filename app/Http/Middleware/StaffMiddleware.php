@@ -7,16 +7,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class StaffMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  Closure(Request): (Response)  $next
-     */
     public function handle(Request $request, Closure $next): Response
     {
 
-        if (auth()->user()->role != 'staff') {
+        if (! in_array(auth()->user()->role, ['staff', 'admin'])) {
+
             abort(403);
+
         }
 
         return $next($request);
