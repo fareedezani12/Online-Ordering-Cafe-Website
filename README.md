@@ -77,22 +77,6 @@ Promotion Management
 Report Module
 Installation
 
-Clone the repository:
-
-git clone https://github.com/yourusername/peta-dunia-cafe.git
-
-Install dependencies:
-
-composer install
-
-Configure the database in the .env file and run:
-
-php artisan migrate
-
-Start the application:
-
-php artisan serve
-
 Access the system at:
 
 http://127.0.0.1:8000
@@ -128,13 +112,13 @@ Project Title: Peta Dunia Cafe Online Ordering System
 
 Developer
 
-Name: [Your Name]
+Name: Muhammad Fareed bin Ezani
 
-Matric Number: [Your Matric Number]
+Matric Number: D20241114397
 
-Programme: [Your Programme]
+Programme: AC10 - Bachelor of Software Engineering
 
-Semester: [Current Semester]
+Semester: 4
 
 Academic Use
 
