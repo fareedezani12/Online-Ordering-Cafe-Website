@@ -1,59 +1,141 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Peta Dunia Cafe Online Ordering System
+DES3073 - Software Engineering Project
+Project Description
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Peta Dunia Cafe Online Ordering System is a web-based application developed to simplify the ordering process for customers while improving order management for staff and administrators.
 
-## About Laravel
+The system supports dine-in and takeaway services, allowing customers to browse menus, place orders, track order status, and participate in a membership rewards program.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This project was developed as part of the DES3073 Software Engineering course.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Objectives
+Develop a web-based ordering system for a café.
+Improve customer ordering experience.
+Digitalize order management for staff.
+Implement a membership loyalty program.
+Apply software engineering principles in system development.
+System Features
+Guest
+Browse menu
+View gallery
+Add items to cart
+Checkout as guest
+Track latest order using phone number
+Customer
+User registration and login
+Customer dashboard
+Shopping cart
+Checkout
+Order history
+Membership system
+Reward points
+QR membership card
+Profile management
+Staff
+Dashboard
+View customer orders
+Update order status
+Manage menu
+Administrator
+Dashboard
+Customer management
+Promotion management
+Report generation
+Export reports
+System monitoring
+Membership Levels
+Level	Minimum Spending
+Bronze	RM0
+Silver	RM300
+Gold	RM800
+Platinum	RM1500
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Reward points are automatically accumulated after completed orders.
 
-## Learning Laravel
+Technologies Used
+Laravel Framework
+PHP
+MySQL
+Blade Template Engine
+HTML5
+CSS3
+JavaScript
+Font Awesome
+Project Modules
+Landing Page
+Authentication
+Customer Dashboard
+Menu Management
+Shopping Cart
+Checkout
+Order Tracking
+Membership Management
+Customer Profile
+Staff Dashboard
+Admin Dashboard
+Promotion Management
+Report Module
+Installation
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Clone the repository:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+git clone https://github.com/yourusername/peta-dunia-cafe.git
 
-## Laravel Sponsors
+Install dependencies:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+composer install
 
-### Premium Partners
+Configure the database in the .env file and run:
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+php artisan migrate
 
-## Contributing
+Start the application:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+php artisan serve
 
-## Code of Conduct
+Access the system at:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+http://127.0.0.1:8000
+User Roles
+Guest
+Browse menu
+Place order
+Track order
+Customer
+View dashboard
+Manage profile
+View membership
+View order history
+Staff
+Process orders
+Update order status
+Manage menu
+Administrator
+Manage promotions
+Generate reports
+Monitor customer orders
+Future Enhancements
+Online payment gateway
+Email notifications
+Mobile application
+Real-time order notifications
+Customer feedback system
+Course Information
 
-## Security Vulnerabilities
+Course: DES3073 – Software Engineering
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Project Title: Peta Dunia Cafe Online Ordering System
 
-## License
+Developer
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Name: [Your Name]
+
+Matric Number: [Your Matric Number]
+
+Programme: [Your Programme]
+
+Semester: [Current Semester]
+
+Academic Use
+
+This project is developed for educational purposes as part of the DES3073 Software Engineering course.
