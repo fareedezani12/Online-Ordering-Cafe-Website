@@ -8,7 +8,28 @@ class MenuController extends Controller
     public function home()
     {
 
-        $menus = Menu::all();
+        $menus = Menu::query();
+
+        if (request('category')) {
+
+            $menus->where(
+                'category',
+                request('category')
+            );
+
+        }
+
+        if (request('search')) {
+
+            $menus->where(
+                'name',
+                'like',
+                '%' . request('search') . '%'
+            );
+
+        }
+
+        $menus = $menus->paginate(8);
         return view('landing.home', compact('menus'));
 
     }
@@ -16,7 +37,28 @@ class MenuController extends Controller
     public function menu()
     {
 
-        $menus = Menu::all();
+        $menus = Menu::query();
+
+        if (request('category')) {
+
+            $menus->where(
+                'category',
+                request('category')
+            );
+
+        }
+
+        if (request('search')) {
+
+            $menus->where(
+                'name',
+                'like',
+                '%' . request('search') . '%'
+            );
+
+        }
+
+        $menus = $menus->paginate(8);
         return view('landing.menu', compact('menus'));
 
     }

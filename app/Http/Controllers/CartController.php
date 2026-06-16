@@ -161,10 +161,10 @@ class CartController extends Controller
 
         session()->forget('cart');
 
-        return redirect('/receipt/' . $order->id . '/view');
-
-        return redirect('/menu')
-            ->with('success', 'Order placed successfully');
+        return view(
+            'order-success',
+            compact('order')
+        );
 
     }
 }

@@ -5,19 +5,21 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>My Orders</title>
+<title>My Profile</title>
 
-<link rel="stylesheet" href="{{ asset('css/customer.css') }}">
-<link rel="stylesheet" href="{{ asset('css/orders.css') }}">
-<link rel="stylesheet" href="{{ asset('css/header.css') }}">
-<link rel="stylesheet" href="{{ asset('css/style.css') }}">
-<link rel="stylesheet" href="{{ asset('css/footer.css') }}">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/customer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/menu.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/orders.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/slider.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/staff.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 </head>
 
@@ -134,179 +136,149 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 
     </header>
 
-<section class="orders-hero">
+<section class="profile-hero">
+
+<div class="profile-avatar">
+
+<i class="fas fa-user"></i>
+
+</div>
+
+<div>
 
 <h1>
 
-My Orders
+{{ Auth::user()->name }}
 
 </h1>
 
 <p>
 
-Track every delicious journey from our kitchen to your table.
+{{ Auth::user()->email }}
 
 </p>
 
-</section>
+@if($membership)
 
-<div class="orders-list">
+<span class="member-badge">
 
-@forelse($orders as $order)
+👑 {{ $membership->membership_level }} Member
 
-<div class="order-card-modern">
-
-<div class="order-header">
-
-<div>
-
-<small>
-
-ORDER ID
-
-</small>
-
-<h2>
-
-#{{ $order->id }}
-
-</h2>
-
-</div>
-
-<div>
-
-<h2>
-
-RM {{ number_format($order->total_price,2) }}
-
-</h2>
-
-</div>
-
-</div>
-
-<div class="order-progress">
-
-<div class="progress-line">
-
-<div class="progress-active
-
-@if($order->status=='pending')
-
-pending
-
-@elseif($order->status=='preparing')
-
-preparing
-
-@else
-
-completed
+</span>
 
 @endif
 
-">
-
 </div>
 
-</div>
+</section>
 
-<div class="progress-text">
+<div class="profile-grid">
 
-<span>
-
-Received
-
-</span>
-
-<span>
-
-Preparing
-
-</span>
-
-<span>
-
-Completed
-
-</span>
-
-</div>
-
-</div>
-
-<div class="order-footer">
-
-<div>
-
-<strong>
-
-Payment
-
-</strong>
-
-<br>
-
-{{ ucfirst($order->payment_status) }}
-
-</div>
-
-<div>
-
-<strong>
-
-Status
-
-</strong>
-
-<br>
-
-{{ ucfirst($order->status) }}
-
-</div>
-
-<div>
-
-<a href="/receipt/{{ $order->id }}/view">
-
-View Receipt
-
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-@empty
-
-<div class="empty-card">
-
-<i class="fas fa-box-open"></i>
+<div class="profile-card">
 
 <h2>
 
-No Orders Yet
+Personal Information
 
 </h2>
 
-<p>
+<form action="{{ route('profile.update') }}" method="POST">
 
-Start exploring our international menu today.
+@csrf
 
-</p>
+@method('PATCH')
 
-<a href="/menu">
+<label>
 
-Browse Menu
+Full Name
 
-</a>
+</label>
+
+<input type="text"
+
+name="name"
+
+value="{{ Auth::user()->name }}">
+
+<label>
+
+Email
+
+</label>
+
+<input type="email"
+
+name="email"
+
+value="{{ Auth::user()->email }}">
+
+<button type="submit">
+
+Update Profile
+
+</button>
+
+</form>
 
 </div>
 
-@endforelse
+<div class="account-card">
+
+<h2>
+
+Account Summary
+
+</h2>
+
+<div class="summary-item">
+
+<span>Total Points</span>
+
+<strong>
+
+{{ $membership->points ?? 0 }}
+
+</strong>
+
+</div>
+
+<div class="summary-item">
+
+<span>Membership</span>
+
+<strong>
+
+{{ $membership->membership_level ?? 'Bronze' }}
+
+</strong>
+
+</div>
+
+<div class="summary-item">
+
+<span>Total Spending</span>
+
+<strong>
+
+RM {{ number_format($membership->total_spending ?? 0,2) }}
+
+</strong>
+
+</div>
+
+<div class="summary-item">
+
+<span>Total Orders</span>
+
+<strong>
+
+{{ $ordersCount }}
+
+</strong>
+
+</div>
+
+</div>
 
 </div>
 <footer class="footer">
@@ -357,6 +329,7 @@ Browse Menu
         </div>
     </footer>
 </div>
+
 
 </body>
 

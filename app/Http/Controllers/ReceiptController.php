@@ -12,7 +12,7 @@ class ReceiptController extends Controller
             ->findOrFail($id);
 
         $pdf = Pdf::loadView(
-            'receipts.invoice',
+            'receipts.view',
             compact('order')
         );
 
