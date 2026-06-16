@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
 </head>
+
 <body>
 <div id="loader">
 
@@ -33,41 +34,171 @@
 
 </div>
 <div class="container">
-    <header>
-        <div class="logo">
-            <img src="{{ asset('images/logo-petadunia.jpg') }}" alt="Peta Dunia Logo" class="logo-img">
-            <span>Peta Dunia Cafe</span>
-        </div>
 
-        <nav id="nav">
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="{{ url('/menu') }}">Menu</a></li>
-                <li><a href="{{ url('/gallery') }}">Gallery</a></li>
-                <li><a href="{{ url('/about') }}">About Us</a></li>
-            </ul>
-        </nav>
+<header id="header">
 
-        <div class="buttons">
+    <div class="logo">
+
+        <a href="{{ Auth::check() ? url('/customer') : url('/') }}">
+
+            <img src="{{ asset('images/logo-petadunia.jpg') }}"
+                 class="logo-img">
+
+        </a>
+
+        <span>
+
+            Peta Dunia Cafe
+
+        </span>
+
+    </div>
+
+    <nav>
+
+        <ul>
+
+            <li>
+
+                <a href="{{ Auth::check() ? url('/customer') : url('/') }}">
+
+                    Home
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="{{ url('/menu') }}">
+
+                    Menu
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="{{ url('/gallery') }}">
+
+                    Gallery
+
+                </a>
+
+            </li>
+
+            @guest
+
+            <li>
+
+                <a href="{{ url('/track-order') }}">
+
+                    Track Order
+
+                </a>
+
+            </li>
+
+            @endguest
+
             @auth
-                <a href="{{ url('/dashboard') }}" class="btn btn-primary">Dashboard</a>
-            @else
-                <a href="{{ route('login') }}" class="btn btn-primary">Sign In</a>
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}" class="btn btn-secondary">Sign Up</a>
-                @endif
+
+            <li>
+
+                <a href="{{ url('/membership') }}">
+
+                    Membership
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="{{ url('/my-orders') }}">
+
+                    My Orders
+
+                </a>
+
+            </li>
+
             @endauth
 
-            <div class="cart-icon">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="cart-count">0</span>
-            </div>
+        </ul>
 
-            <div class="hamburger" id="hamburger">
-                <i class="fas fa-bars"></i>
-            </div>
-        </div>
-    </header>
+    </nav>
+
+    <div class="header-right">
+
+        @guest
+
+        <a href="{{ url('/cart') }}"
+           class="cart-btn">
+
+            <i class="fas fa-shopping-cart"></i>
+
+            Cart
+
+        </a>
+
+        <a href="{{ route('login') }}"
+           class="profile-btn">
+
+            Login
+
+        </a>
+
+        <a href="{{ route('register') }}"
+           class="logout-btn">
+
+            Register
+
+        </a>
+
+        @endguest
+
+        @auth
+
+        <a href="{{ url('/cart') }}"
+           class="cart-btn">
+
+            <i class="fas fa-shopping-cart"></i>
+
+            Cart
+
+        </a>
+
+        <a href="{{ url('/customer/profile') }}"
+           class="profile-btn">
+
+            <i class="fas fa-user-circle"></i>
+
+            {{ Auth::user()->name }}
+
+        </a>
+
+        <form action="{{ route('logout') }}"
+              method="POST">
+
+            @csrf
+
+            <button class="logout-btn">
+
+                Logout
+
+            </button>
+
+        </form>
+
+        @endauth
+
+    </div>
+
+</header>
+
+
 
     <main>
         <section class="hero">

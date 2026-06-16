@@ -212,6 +212,40 @@ completed
 
 </div>
 
+@php
+
+$waiting='Ready';
+
+switch($order->status){
+
+case 'pending':
+
+$waiting='15 Minutes';
+
+break;
+
+case 'preparing':
+
+$waiting='8 Minutes';
+
+break;
+
+case 'completed':
+
+$waiting='Ready For Collection';
+
+break;
+
+case 'cancelled':
+
+$waiting='Cancelled';
+
+break;
+
+}
+
+@endphp
+
 <div class="progress-text">
 
 <span>
@@ -231,6 +265,18 @@ Preparing
 Completed
 
 </span>
+
+<p>
+
+⏱ Waiting Time:
+
+<strong>
+
+{{ $waiting }}
+
+</strong>
+
+</p>
 
 </div>
 

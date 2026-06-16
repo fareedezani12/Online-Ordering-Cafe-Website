@@ -205,6 +205,8 @@ style="max-width:300px;">
 
 <th>Date</th>
 
+<th>Waiting Time</th>
+
 <th>Action</th>
 
 </tr>
@@ -214,6 +216,32 @@ style="max-width:300px;">
 <tbody id="orderTable">
 
 @forelse($orders as $order)
+
+@php
+
+$waiting = 'Ready';
+
+switch($order->status){
+
+    case 'pending':
+        $waiting = '15 min';
+        break;
+
+    case 'preparing':
+        $waiting = '8 min';
+        break;
+
+    case 'completed':
+        $waiting = 'Ready';
+        break;
+
+    case 'cancelled':
+        $waiting = 'Cancelled';
+        break;
+
+}
+
+@endphp
 
 <tr>
 
@@ -284,6 +312,16 @@ Cancelled
 <td>
 
 {{ $order->created_at->format('d M Y') }}
+
+</td>
+
+<td>
+
+<span class="badge-waiting">
+
+⏱ {{ $waiting }}
+
+</span>
 
 </td>
 

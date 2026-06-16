@@ -110,11 +110,7 @@
 
             </a>
 
-            <a href="{{ url('/customer/profile') }}" class="profile-btn">
-
-                <i class="fas fa-user-circle"></i>
-
-                {{ Auth::user()->name }}
+            <a                 {{ Auth::user()->name }}
 
             </a>
 
@@ -199,6 +195,23 @@ Full Name
 name="name"
 
 value="{{ Auth::user()->name }}">
+rofile.update') }}" method="POST">
+
+@csrf
+
+@method('PATCH')
+
+<label>
+
+Full Name
+
+</label>
+
+<input type="text"
+
+name="name"
+
+value="{{ Auth::check() ? Auth::user()->name : 'Guest' }}">
 
 <label>
 

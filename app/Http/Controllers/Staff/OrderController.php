@@ -45,7 +45,7 @@ class OrderController extends Controller
 
             'status'         => $request->status,
 
-            'payment_status' => $request->payment_status,
+            'payment_status' => $request->payment_status ?? $order->payment_status,
 
         ]);
 

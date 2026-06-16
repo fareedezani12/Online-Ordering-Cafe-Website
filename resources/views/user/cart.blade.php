@@ -112,7 +112,7 @@
 
                 <i class="fas fa-user-circle"></i>
 
-                {{ Auth::user()->name }}
+                {{ Auth::check() ? Auth::user()->name : 'Guest' }}
 
             </a>
 
@@ -246,7 +246,17 @@ Browse Menu
 
         <a href="{{ url('/remove-cart/'.$loop->index) }}">
 
-        Remove
+        <a href="/cart/decrease/{{ $loop->index }}">-</a>
+
+{{ $item['quantity'] }}
+
+<a href="/cart/increase/{{ $loop->index }}">+</a>
+
+<a href="/remove-cart/{{ $loop->index }}">
+
+🗑
+
+</a>
 
         </a>
 

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\PromotionController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\GuestTrackController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReceiptController;
@@ -30,15 +31,25 @@ Route::get('/checkout', [CartController::class, 'checkout']);
 Route::post('/place-order', [CartController::class, 'placeOrder']);
 Route::get('/receipt/{id}/view', [ReceiptController::class, 'viewReceipt']);
 Route::get('/receipt/{id}', [ReceiptController::class, 'generate']);
+Route::get(
+    '/track-order',
+    [GuestTrackController::class, 'index']
+)->name('track.order');
+
+Route::post(
+    '/track-order',
+    [GuestTrackController::class, 'search']
+)->name('track.order.search');
+
+Route::get('/cart/increase/{id}', [CartController::class, 'increase']);
+Route::get('/cart/decrease/{id}', [CartController::class, 'decrease']);
 
 Route::get('/dashboard', function () {
-
     if (Auth::user()->role === 'admin') {
 
         return redirect('/admin');
 
     }
-
     if (Auth::user()->role === 'staff') {
 
         return redirect('/staff');
@@ -49,21 +60,10 @@ Route::get('/dashboard', function () {
 
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get(
-    '/customer/profile',
-    [UserDashboardController::class, 'profile']
-)
-    ->middleware('auth')
-    ->name('customer.profile');
-
-Route::get('/customer/rewards', function () {return view('user.rewards');})->middleware('auth')->name('customer.rewards');
-
 Route::middleware('auth')->group(function () {
 
-    Route::get(
-        '/customer',
-        [UserDashboardController::class, 'index']
-    );
+    Route::get('/customer', [UserDashboardController::class, 'index']);
+    Route::get('/customer/profile', [UserDashboardController::class, 'profile'])->name('customer.profile');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -75,9 +75,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'staff'])->group(function () {
 
     Route::get('/staff', [StaffController::class, 'dashboard']);
-
     Route::resource('staff/menu', StaffMenuController::class);
-
     Route::get('/staff/orders', [OrderController::class, 'index']);
     Route::get('/staff/orders/{id}', [OrderController::class, 'show']);
     Route::put('/staff/orders/{id}', [OrderController::class, 'update']);

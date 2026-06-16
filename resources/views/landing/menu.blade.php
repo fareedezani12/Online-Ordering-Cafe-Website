@@ -25,114 +25,168 @@
 <body>
 
 <div class="container">
-    <header id="header">
+<header id="header">
 
-        <div class="logo">
+    <div class="logo">
+
+        <a href="{{ Auth::check() ? url('/customer') : url('/') }}">
 
             <img src="{{ asset('images/logo-petadunia.jpg') }}"
-                class="logo-img">
+                 class="logo-img">
 
-            <span>
+        </a>
 
-                Peta Dunia Cafe
+        <span>
 
-            </span>
+            Peta Dunia Cafe
 
-        </div>
+        </span>
 
-        <nav>
+    </div>
 
-            <ul>
+    <nav>
 
-                <li>
+        <ul>
 
-                    <a href="{{ url('/customer') }}">
+            <li>
 
-                        Home
+                <a href="{{ Auth::check() ? url('/customer') : url('/') }}">
 
-                    </a>
+                    Home
 
-                </li>
+                </a>
 
-                <li>
+            </li>
 
-                    <a href="{{ url('/menu') }}">
+            <li>
 
-                        Menu
+                <a href="{{ url('/menu') }}">
 
-                    </a>
+                    Menu
 
-                </li>
+                </a>
 
-                <li>
+            </li>
 
-                    <a href="{{ url('/gallery') }}">
+            <li>
 
-                        Gallery
+                <a href="{{ url('/gallery') }}">
 
-                    </a>
+                    Gallery
 
-                </li>
+                </a>
 
-                <li>
+            </li>
 
-                    <a href="{{ url('/membership') }}">
+            @guest
 
-                        Membership
+            <li>
 
-                    </a>
+                <a href="{{ url('/track-order') }}">
 
-                </li>
+                    Track Order
 
-                <li>
+                </a>
 
-                    <a href="{{ url('/my-orders') }}">
+            </li>
 
-                        My Orders
+            @endguest
 
-                    </a>
+            @auth
 
-                </li>
+            <li>
 
-            </ul>
+                <a href="{{ url('/membership') }}">
 
-        </nav>
+                    Membership
 
-        <div class="header-right">
+                </a>
 
-            <a href="{{ url('/cart') }}" class="cart-btn">
+            </li>
 
-                <i class="fas fa-shopping-cart"></i>
+            <li>
 
-                Cart
+                <a href="{{ url('/my-orders') }}">
 
-            </a>
+                    My Orders
 
-            <a href="{{ url('/customer/profile') }}" class="profile-btn">
+                </a>
 
-                <i class="fas fa-user-circle"></i>
+            </li>
 
-                {{ Auth::user()->name }}
+            @endauth
 
-            </a>
+        </ul>
 
-            <form action="{{ route('logout') }}"
-                method="POST">
+    </nav>
 
-                @csrf
+    <div class="header-right">
 
-                <button type="submit"
-                        class="logout-btn">
+        @guest
 
-                    Logout
+        <a href="{{ url('/cart') }}"
+           class="cart-btn">
 
-                </button>
+            <i class="fas fa-shopping-cart"></i>
 
-            </form>
+            Cart
 
-        </div>
+        </a>
 
-    </header>
+        <a href="{{ route('login') }}"
+           class="profile-btn">
+
+            Login
+
+        </a>
+
+        <a href="{{ route('register') }}"
+           class="logout-btn">
+
+            Register
+
+        </a>
+
+        @endguest
+
+        @auth
+
+        <a href="{{ url('/cart') }}"
+           class="cart-btn">
+
+            <i class="fas fa-shopping-cart"></i>
+
+            Cart
+
+        </a>
+
+        <a href="{{ url('/customer/profile') }}"
+           class="profile-btn">
+
+            <i class="fas fa-user-circle"></i>
+
+            {{ Auth::check() ? Auth::user()->name : 'Guest' }}
+
+        </a>
+
+        <form action="{{ route('logout') }}"
+              method="POST">
+
+            @csrf
+
+            <button class="logout-btn">
+
+                Logout
+
+            </button>
+
+        </form>
+
+        @endauth
+
+    </div>
+
+</header>
 
     <!-- SLIDER SECTION (now same width and alignment as menu sections below) -->
     <div class="slider">
