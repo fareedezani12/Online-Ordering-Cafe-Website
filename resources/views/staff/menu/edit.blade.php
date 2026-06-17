@@ -82,7 +82,7 @@ Update menu information, image and pricing.
 
 <div class="hero-right">
 
-<img src="{{ asset('images/emoji-dashboard-staff2.png') }}">
+<img src="{{ asset('images/gambar-staff.png') }}">
 
 </div>
 

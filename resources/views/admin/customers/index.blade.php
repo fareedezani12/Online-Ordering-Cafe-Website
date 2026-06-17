@@ -77,7 +77,7 @@ Dashboard
 
     <div class="hero-right">
 
-        <img src="{{ asset('images/emoji-dashboard-staff2.png') }}">
+        <img src="{{ asset('images/gambar-admin.png') }}">
 
     </div>
 

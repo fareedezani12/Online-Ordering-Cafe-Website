@@ -88,7 +88,7 @@ Create, edit and organize all food and beverage items from one place.
 
 <div class="hero-right">
 
-<img src="{{ asset('images/emoji-dashboard-staff2.png') }}">
+<img src="{{ asset('images/gambar-staff.png') }}">
 
 </div>
 

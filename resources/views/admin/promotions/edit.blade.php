@@ -86,7 +86,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 
     <div class="hero-right">
 
-        <img src="{{ asset('images/emoji-dashboard-staff2.png') }}">
+        <img src="{{ asset('images/gambar-admin.png') }}">
 
     </div>
 

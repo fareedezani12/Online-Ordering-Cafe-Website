@@ -592,6 +592,18 @@
     background: #f47920;
 }
 
+@media (max-width: 1200px) {
+    .membership-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .membership-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 .membership-section {
     padding: 10px 0;
 }
@@ -604,14 +616,26 @@
     gap: 30px;
 
     margin-top: 70px;
+
+    align-items: stretch;
 }
 
 .member-card {
-    background: white;
+    background: #fff;
 
     border-radius: 30px;
 
     padding: 40px 30px;
+
+    min-height: 480px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
 
     position: relative;
 
@@ -623,37 +647,53 @@
 }
 
 .member-card:hover {
-    transform: translateY(-12px);
+    transform: translateY(-10px);
 }
 
 .member-icon {
-    font-size: 65px;
+    font-size: 70px;
 
     margin-bottom: 20px;
 }
 
 .member-card h3 {
-    font-size: 34px;
-
+    font-size: 30px;
+    color: #00573f;
     margin-bottom: 15px;
 }
 
 .member-card p {
     color: #666;
 
+    font-size: 17px;
+
+    line-height: 28px;
+
     margin-bottom: 25px;
 }
 
 .member-card ul {
+    list-style: none;
+
     padding: 0;
 
-    list-style: none;
+    margin: 0;
+
+    width: 100%;
 }
 
 .member-card li {
     padding: 10px 0;
 
+    border-bottom: 1px solid #eee;
+
+    color: #555;
+
     font-size: 16px;
+}
+
+.member-card li:last-child {
+    border: none;
 }
 
 .bronze {
@@ -695,7 +735,7 @@
 .membership-button {
     text-align: center;
 
-    margin-top: 70px;
+    margin-top: 10px;
 }
 
 .membership-button a {

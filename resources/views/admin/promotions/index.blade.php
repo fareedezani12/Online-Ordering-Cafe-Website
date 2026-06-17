@@ -100,7 +100,7 @@ Create attractive promotions and boost your cafe sales.
 <div class="hero-right">
 
 <img
-src="{{ asset('images/emoji-dashboard-staff2.png') }}">
+src="{{ asset('images/gambar-admin.png') }}">
 
 </div>
 

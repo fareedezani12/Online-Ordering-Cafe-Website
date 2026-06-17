@@ -708,12 +708,6 @@
 
             </p>
 
-            <a href="{{ route('customer.rewards') }}">
-
-            Redeem Rewards
-
-            </a>
-
             </div>
 
         </section>
